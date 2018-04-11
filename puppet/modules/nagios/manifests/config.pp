@@ -31,17 +31,6 @@ class nagios::config {
 		email => 'root@localhost',
 	}
 	
-	nagios_contact { 'garbca1':
-		target => '/etc/nagios3/conf.d/ppt_contacts.cfg',
-		alias => 'Chris',
-		service_notification_period => '24x7',
-		host_notification_period => '24x7',
-		service_notification_options => 'w,u,c,r',
-		host_notification_options => 'd,r',
-		service_notification_commands => 'notify-service-by-email',
-		host_notification_commands => 'notify-host-by-email',
-		email => 'root@localhost',
-	}
 
 	nagios_contactgroup { 'sysadmins':
 		target => '/etc/nagios3/conf.d/ppt_contactgroups.cfg',
