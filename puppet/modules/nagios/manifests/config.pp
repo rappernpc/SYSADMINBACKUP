@@ -31,7 +31,7 @@ class nagios::config {
 		email => 'root@localhost',
 	}
 	
-	nagios_contact { 'garbca1';
+	nagios_contact { 'garbca1':
 		target => '/etc/nagios3/conf.d/ppt_contacts.cfg',
 		alias => 'Chris',
 		service_notification_period => '24x7',
@@ -46,7 +46,7 @@ class nagios::config {
 	nagios_contactgroup { 'sysadmins':
 		target => '/etc/nagios3/conf.d/ppt_contactgroups.cfg',
 		alias => 'Systems Administrators',
-		members = 'garbca1, garribh1',
+		members => 'garribh1',
 	}
 
 	nagios_host { 'db.foo.org.nz':
@@ -77,13 +77,10 @@ class nagios::config {
 		contact_groups => 'sysadmins',
 	}
 
-	nagios_hostgroup {'db-servers':
+	nagios_hostgroup { 'db-servers':
 		target => '/etc/nagios3/conf.d/ppt_hostgroups.cfg',
 		alias => 'Database Servers',
 		members => 'db.foo.org.nz',
 	}
-
-
-	
 }
 
