@@ -26,11 +26,22 @@ class nagios::config {
 		host_notification_period => '24x7',
 		service_notification_options => 'w,u,c,r',
 		host_notification_options => 'd,r',
-		service_notification_commands => 'notify-service-by-email',
-		host_notification_commands => 'notify-host-by-email',
-		email => 'root@localhost',
+		service_notification_commands => 'notify-service-by-email, notify-service-by-slack',
+		host_notification_commands => 'notify-host-by-email, notify-host-by-slack',
+		email => 'garribh1@student.op.ac.nz',
 	}
 	
+	nagios_contact { 'garbca1':
+		target => '/etc/nagios3/conf.d/ppt_contacts.cfg',
+		alias => 'Chris',
+		service_notification_period => '24x7',
+		host_notification_period => '24x7',
+		service_notification_options = 'w,u,c,r',
+		host_notification_options => 'd,r',
+		service_notification_commands => 'notify-service-by-email, notify-service-by-slack',
+		host_notification_commands => 'notify-host-by-email, notify-host-by-slack',
+		email => 'garbca1@student.op.ac.nz',
+	}	
 
 	nagios_contactgroup { 'sysadmins':
 		target => '/etc/nagios3/conf.d/ppt_contactgroups.cfg',
