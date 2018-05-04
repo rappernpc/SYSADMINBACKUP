@@ -1,22 +1,22 @@
 class nagios::config {
-	file { "/etc/nagios3/htpasswd.users":
+	file { '/etc/nagios3/htpasswd.users':
 		ensure => present,
-		source => "puppet:///modules/nagios/htpasswd.users",
+		source => 'puppet:///modules/nagios/htpasswd.users',
 		mode => 0444,
-		owner => "nagios",
-		group => "nagios",
-		require => Class["nagios::install"],
-		notify => Class["nagios::service"],
+		owner => 'nagios',
+		group => 'nagios',
+		require => Class['nagios::install'],
+		notify => Class['nagios::service'],
 	}
 
-	file { "/etc/nagios3/nagios.cfg":
+	file { '/etc/nagios3/nagios.cfg':
 		ensure => present,
-		source => "puppet:///modules/nagios/nagios.cfg",
+		source => 'puppet:///modules/nagios/nagios.cfg',
 		mode => 0444,
-		owner => "nagios",
-		group => "nagios",
-		require => Class["nagios::install"],
-		notify => Class["nagios::service"],
+		owner => 'nagios',
+		group => 'nagios',
+		require => Class['nagios::install'],
+		notify => Class['nagios::service'],
 	}
 
 	nagios_contact { 'garribh1':
@@ -36,7 +36,7 @@ class nagios::config {
 		alias => 'Chris',
 		service_notification_period => '24x7',
 		host_notification_period => '24x7',
-		service_notification_options = 'w,u,c,r',
+		service_notification_options => 'w,u,c,r',
 		host_notification_options => 'd,r',
 		service_notification_commands => 'notify-service-by-email, notify-service-by-slack',
 		host_notification_commands => 'notify-host-by-email, notify-host-by-slack',
@@ -46,7 +46,7 @@ class nagios::config {
 	nagios_contactgroup { 'sysadmins':
 		target => '/etc/nagios3/conf.d/ppt_contactgroups.cfg',
 		alias => 'Systems Administrators',
-		members => 'garribh1',
+		members => 'garribh1, garbca1',
 	}
 
 	nagios_host { 'db.foo.org.nz':
