@@ -1,7 +1,7 @@
 class bacula-file::config {
 	file { "/etc/bacula/bacula-fd.conf":
 		ensure => present,
-		source => "puppet:///modules/bacula-file/bacula-fd.conf",
+		content => template('bacula-file/bacula-fd.conf.erb'),
 		mode => 0440,
 		owner => 'bacula',
 		group => 'bacula',
