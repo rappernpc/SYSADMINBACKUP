@@ -35,7 +35,7 @@ FileDaemon {                          # this is me
   Pid Directory = /var/run/bacula
   Maximum Concurrent Jobs = 20
 # Plugin Directory = /usr/lib/bacula
-  FDAddress = 127.0.0.1
+  FDAddress = <%= @ipaddress %>
 }
 
 # Send all messages except skipped files back to Director
