@@ -17,4 +17,10 @@ class mysql::config {
 		require => Class["mysql::install"],
 		notify => Class["mysql::service"],
 	}
+	cron { mysqlbackup:
+		command => "mysqldump --all-databases --add-drop-table > /home/garribh1/mysql-backup/mysqlbak.sql",
+		user => root,
+		hour => 1,
+		minute => 20,
+	}
 }
