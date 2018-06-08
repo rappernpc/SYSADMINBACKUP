@@ -62,6 +62,47 @@ class nagios::config {
 		contact_groups => 'sysadmins',
 	}
 
+	nagios_host { 'storage.foo.org.nz':
+		target => '/etc/nagios3/conf.d/ppt_hosts.cfg',
+		alias => 'storage',
+		address => '10.25.100.15',
+		check_period => '24x7',
+		max_check_attempts => 3, 
+		check_command => 'check-host-alive',
+		notification_interval => 30,
+		notification_period => '24x7',
+		notification_options => 'd,u,r',
+		contact_groups => 'sysadmins',
+	}
+
+	nagios_host { 'app.foo.org.nz':
+		target => '/etc/nagios3/conf.d/ppt_hosts.cfg',
+		alias => 'app',
+		address => '10.25.137.141',
+		check_period => '24x7',
+		max_check_attempts => 3,
+		check_command => 'check-host-alive',
+		notification_interval => 30,
+		notification_period => '24x7',
+		notification_options => 'd,u,r',
+		contact_groups => 'sysadmins',
+	}
+	
+	nagios_service { 'Apache':
+		service_description => 'Check Apache Web Server',
+		hostgroup_name => 'app-server',
+		target => '/etc/nagios3/conf.d/ppt_apache2_service.cfg',
+		check_command => 'check_http',
+		max_check_attempts => 3, 
+		retry_check_interval => 1,
+		normal_check_interval => 5,
+		check_period => '24x7',
+		notification_interval => 30,
+		notification_period => '24x7',
+		notification_options => 'w,u,c',
+		contact_groups => 'sysadmins',
+	}
+		
 	nagios_service { 'MySQL':
 		service_description => 'MySQL DB',
 		hostgroup_name => 'db-servers',
@@ -81,6 +122,17 @@ class nagios::config {
 		target => '/etc/nagios3/conf.d/ppt_hostgroups.cfg',
 		alias => 'Database Servers',
 		members => 'db.foo.org.nz',
+	}
+
+	nagios_hostgroup { 'servers':
+		target => '/etc/nagios3/conf.d/ppt_hostgroups.cfg',
+		alias => 'Other Servers',
+		members => 'storage.foo.org.nz, app.foo.org.nz',
+	}
+	nagios_hostgroup { 'app-server':
+		target => '/etc/nagios3/conf.d/ppt_hostgroups.cfg',
+		alias => 'App Server',
+		members => 'app.foo.org.nz',
 	}
 }
 
